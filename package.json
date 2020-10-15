@@ -4,7 +4,8 @@
   "description": "friendapp_server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon server.js"
   },
   "keywords": [],
   "author": "firegod17",
@@ -26,6 +27,7 @@
     "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
+    "nodemon": "^2.0.5",
     "rand-token": "^1.0.1"
   }
 }
