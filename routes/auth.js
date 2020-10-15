@@ -54,4 +54,9 @@ router.post('/registerUser', async (req, res)=>{
 
 });
 
+
+router.post('/forgot-password', async (req, res)=>{
+// seriy pls finish this
+});
+
 module.exports = router;
