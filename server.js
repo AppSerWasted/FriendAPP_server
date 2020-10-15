@@ -2,6 +2,7 @@ const express     = require ('express');
 const app		   = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const authUser = require('./routes/auth');
 
 
 var cors = require('cors');
@@ -13,8 +14,8 @@ const portChat = process.env.port || 3000;
 dotenv.config();
 
 //connect to DB Mongo
-//, dbName: "MealAway"
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, function (err) {
+//, dbName: "FriendApp"
+mongoose.connect(process.env.DB_CONNECT,  { useNewUrlParser: true, dbName: "FriendApp" }, function (err) {
   if (err) {
       console.log("connection error:", err);
     } else {
@@ -23,15 +24,13 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, function (er
 });
 
 app.use(cors({origin: 'http://localhost:4200'}));
-// app.use(cors({origin: 'http://registrationadvertiser-drivvy.your-choice.website'}));
 
 app.get ('/', (request, response) => {
   response.send ('Frend APP BackEnd!')
 });
 
 app.use(express.json());
-
-
+app.use('/api', authUser);
 
 app.listen(process.env.PORT || 8080, function(){
     console.log("We are living on port " + 8080);
