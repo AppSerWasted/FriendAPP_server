@@ -3,6 +3,7 @@ const User = require('../model/users');
 const bcrypt = require('bcryptjs');
 const {registerValidationUser, loginValidation } = require('../validation');
 const jwt = require('jsonwebtoken');
+// const randtoken = require('rand-token')
 
 router.post('/loginUser',async (req, res) => {
     console.log(req.body)
@@ -35,18 +36,28 @@ router.post('/registerUser', async (req, res)=>{
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    const User = new User({
-        nickName: req.body.name,
+    const user = new User({
+        nickName: req.body.nickName,
         email: req.body.email,
         phone: req.body.phone,
         password: hashedPassword,
     });
 
     try{
-        const savedUser = await User.save();
-        console.log(savedUser._id)
-        res.send({_id: savedUser._id})
+        const savedUser = await user.save();
+        console.log(savedUser._id +"-----------")
+        const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+        // const renewalToken = randtoken.uid()
+        
+        res.send({_id: savedUser._id,
+            name: savedUser.name,
+            email: savedUser.email,
+            phone: savedUser.phone,
+            type: null,
+            token: token,
+            renewalToken: token
+        })
+
     } catch(err){
         res.status(400).send({error: err});
         console.log(err)

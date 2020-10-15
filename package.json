@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/firegod17/FriendAPP_server#readme",
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
+    "@hapi/joi": "^15.0.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.9"
+    "mongoose": "^5.10.9",
+    "rand-token": "^1.0.1"
   }
 }
